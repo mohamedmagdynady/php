@@ -58,7 +58,8 @@ class HomeController extends Controller
                 return back();
             }else{*/
             $page=new empleado;
-            $page->id='5';
+            $page->id=$x;
+            $x=$x+1;
             $page->name=$request->name;
             $page->email=$request->email;
             $page->mobile=$request->mobile;

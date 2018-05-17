@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class attrecord extends Model
 {
     //
+    public $timestamps = false;
 }

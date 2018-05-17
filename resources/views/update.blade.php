@@ -25,7 +25,8 @@
 @endforeach
 
 <div class="row list-group-item">
-    <form method="POST" action="../recordsstore/{{$x}}"> <!-- actions adds that to url where this url call add fuction -->
+    <form method="POST" action="../recordsstore/{{$x}}">
+    {{ csrf_field() }} <!-- actions adds that to url where this url call add fuction -->
         <div class="input-group">
           <input type="date" name="date" class="form-control" placeholder="Add date . . .">
           
