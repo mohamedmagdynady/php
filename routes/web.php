@@ -23,8 +23,11 @@ Route::get('/profile/{employee}/delete', 'HomeController@delete');
 Route::post('/employeesstore', 'HomeController@store');
 
 Route::get('/update/{employee}','HomeController@update');
+Route::get('/personalprofile','HomeController@showprofile');
 
 Route::post('/recordsstore/{x}', 'HomeController@addrecord');
+//Route::get('/postss', 'HomeController@posts');
+Route::get('/posts', 'postcontroller@posts');
+Route::get('/posts/{post}','postcontroller@getpost');
 
-
-
+Route::post('/addpost', 'postcontroller@storepost');

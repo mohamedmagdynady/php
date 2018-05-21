@@ -24,9 +24,17 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/profile') }}">profile
+            @if(auth::check())
+
+                <a class="navbar-brand" href="{{ url('/profile') }}">employees list
 
                 </a>
+                @if(Auth::user()->type<=2)
+                <a class="navbar-brand" href="{{ url('/personalprofile') }}">profile
+
+                </a>
+                @endif
+                @endif
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>

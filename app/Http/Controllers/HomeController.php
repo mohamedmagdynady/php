@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use DB;
 use App\empleado;
 use App\attrecord;
-
+use Auth;
+use Session;
+use Input;
 class HomeController extends Controller
 {
     
@@ -29,6 +31,12 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    public function showprofile(){
+        //if(Auth::user()->type==3){
+          //  return redirect('/');
+        //}
+        return view('personalprofile');
+    }
 
     public function update(empleado $employee)
     {
@@ -49,7 +57,13 @@ class HomeController extends Controller
     public function delete(empleado $employee){
         
         $employee->delete();
-        return back();
+        Session::flash('success', 'employee has been deleted!');
+        $notification = array(
+            'message' => 'Employee deleted succeffully!',
+            'alert-type' => 'info' //success,info,error,warning
+        );
+
+        return back()->with($notification);
         //return view('about');
         }
         public function store(Request $request){
@@ -58,13 +72,20 @@ class HomeController extends Controller
                 return back();
             }else{*/
             $page=new empleado;
-            $page->id=$x;
-            $x=$x+1;
+            //$x='6';
+           // $page->id=$x;
+            
             $page->name=$request->name;
             $page->email=$request->email;
             $page->mobile=$request->mobile;
             $page->save();
-            return back();
+            Session::flash('success', 'employee has been created!');
+            $notification = array(
+                'message' => 'Employee created succeffully!',
+                'alert-type' => 'success'
+            );
+
+            return back()->with($notification);
             //return view('about');
             
         }
@@ -73,6 +94,7 @@ class HomeController extends Controller
                  //echo "<script type='text/javascript'>alert('title entered cannot be empty!')</script>";
                  return back();
              }else{*/
+                $this->validate($request,['status'=>'required|min:3'],['status.required'=>'addsomething in status field']);
              $page=new attrecord;
              $page->employee=$x;
              $page->date=$request->date;
@@ -83,6 +105,7 @@ class HomeController extends Controller
              //return view('about');
              
          }
+      
 
         
 }
